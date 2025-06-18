@@ -6,26 +6,39 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uam.incrementovm.model.AuthResult
+import com.uam.incrementovm.model.LoginRequest
 import com.uam.incrementovm.model.User
+import com.uam.incrementovm.network.RetrofitInstance
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel(){
 
-    var authState by mutableStateOf<AuthResult>(AuthResult.Idle)
+    private val _loginState = MutableStateFlow<AuthResult>(AuthResult.Idle)
+    val loginState : StateFlow<AuthResult> = _loginState
 
     fun login(username : String, password : String){
         viewModelScope.launch {
-            authState = AuthResult.Loading
-            delay(4000)
-            if (username == "admin" && password == "1234") {
-                val user = User(1,"Administrador","jwt-token")
-                authState = AuthResult.Success(user)
+            _loginState.value = AuthResult.Loading
+            try {
+                val response = RetrofitInstance.api
+                    .login(LoginRequest(username,password))
+                val user = User(response.apellido
+                    ,response.email
+                    ,response.id
+                    ,response.nombre)
+                _loginState.value = AuthResult.Success(user)
             }
-            else {
-                authState = AuthResult.Error("Credenciales incorrectas")
+            catch (e : Exception) {
+                _loginState.value = AuthResult.Error("Error ${e.message}")
             }
         }
+    }
+
+    fun resetState() {
+        _loginState.value = AuthResult.Idle
     }
 
 }

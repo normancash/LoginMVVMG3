@@ -61,4 +61,12 @@ dependencies {
     //viewmodel
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //couretines
+    implementation(libs.kotlin.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
 }
