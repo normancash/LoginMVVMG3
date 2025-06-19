@@ -10,6 +10,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -25,7 +26,7 @@ import com.uam.incrementovm.viewmodel.AuthViewModel
 @Composable
 fun LoginScreen(viewModel : AuthViewModel = viewModel())
 {
-    val state = viewModel.authState
+    val state by viewModel.loginState.collectAsState()
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -51,13 +52,13 @@ fun LoginScreen(viewModel : AuthViewModel = viewModel())
             Text("Conectarse")
         }
         Spacer(modifier = Modifier.height(10.dp))
-        when(state) {
+        when(val s = state) {
             is AuthResult.Idle -> Text("Ingrese tus credenciales")
             is AuthResult.Loading -> CircularProgressIndicator()
             is AuthResult.Success -> {
-                Text("Bienvenido/a ${state.user.name}")
+                Text("Bienvenido/a ${s.user.nombre}")
             }
-            is AuthResult.Error -> Text("Error: ${state.message}", color = Color.Red)
+            is AuthResult.Error -> Text("Error: ${s.message}", color = Color.Red)
         }
 
     }
