@@ -14,12 +14,18 @@ val client = OkHttpClient.Builder()
     .build()
 
 object RetrofitInstance {
-    val api: LoginApi by lazy {
+    val api: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-            .create(LoginApi::class.java)
+    }
+
+    val userApi : UserApi by lazy {
+        api.create(UserApi::class.java)
+    }
+    val loginApi : LoginApi by lazy {
+        api.create(LoginApi::class.java)
     }
 }

@@ -1,21 +1,16 @@
 package com.uam.incrementovm.repository
 
-import com.uam.incrementovm.model.LoginRequest
-import com.uam.incrementovm.model.LoginResponse
-import com.uam.incrementovm.network.RetrofitInstance
+import com.uam.incrementovm.model.ListUser
+import com.uam.incrementovm.network.UserApi
 
-class UserRepository {
+class UserRepository(private val api : UserApi) {
 
-    private val api = RetrofitInstance.api
-
-    suspend fun login(username : String,password : String): Result<LoginResponse>
-    {
+    suspend fun getUsers():Result<ListUser> {
         return try {
-            val response = api.login(LoginRequest(username,password))
-            Result.success(response)
-        }
-        catch (e:Exception){
-            Result.failure(e)
-        }
+                Result.success(api.getAll())
+            }
+            catch (e: Exception){
+                Result.failure(e)
+            }
     }
 }

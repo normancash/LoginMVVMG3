@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.uam.incrementovm.screen.IncrementoScreen
+import com.uam.incrementovm.screen.ListUserScreen
 import com.uam.incrementovm.screen.LoginScreen
 import com.uam.incrementovm.ui.theme.IncrementoVMTheme
 
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             IncrementoVMTheme {
                 Surface {
-                    LoginScreen()
+                    ListUserScreen()
                 }
             }
         }
