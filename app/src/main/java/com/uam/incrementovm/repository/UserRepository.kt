@@ -1,6 +1,7 @@
 package com.uam.incrementovm.repository
 
 import com.uam.incrementovm.model.ListUser
+import com.uam.incrementovm.model.User
 import com.uam.incrementovm.network.UserApi
 
 class UserRepository(private val api : UserApi) {
@@ -12,5 +13,23 @@ class UserRepository(private val api : UserApi) {
             catch (e: Exception){
                 Result.failure(e)
             }
+    }
+
+    suspend fun getUserById(userId : Int):User {
+        val response = getUsers()
+        var user : User? = null
+        return try {
+            response.fold(
+                onSuccess = {
+                    user = it.find {it.id == userId }
+                },
+                onFailure = {
+                    user = null
+                }
+            )
+        }
+        catch (e:Exception){
+            user = null
+        } as User
     }
 }
