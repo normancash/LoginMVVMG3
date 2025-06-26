@@ -15,21 +15,4 @@ class UserRepository(private val api : UserApi) {
             }
     }
 
-    suspend fun getUserById(userId : Int):User {
-        val response = getUsers()
-        var user : User? = null
-        return try {
-            response.fold(
-                onSuccess = {
-                    user = it.find {it.id == userId }
-                },
-                onFailure = {
-                    user = null
-                }
-            )
-        }
-        catch (e:Exception){
-            user = null
-        } as User
-    }
 }

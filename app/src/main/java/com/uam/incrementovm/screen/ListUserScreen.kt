@@ -15,11 +15,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.uam.incrementovm.model.User
 import com.uam.incrementovm.viewmodel.UserViewModel
 
 @Composable
-fun ListUserScreen(viewModel : UserViewModel = viewModel())
+fun ListUserScreen(onNext:(User)->Unit)
 {
+    val viewModel : UserViewModel = viewModel()
     val state = viewModel.users.collectAsState()
     LazyColumn(modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(30.dp)
@@ -29,7 +31,8 @@ fun ListUserScreen(viewModel : UserViewModel = viewModel())
             Card(
                 modifier = Modifier.fillMaxWidth()
                     .padding(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp)
+                elevation = CardDefaults.cardElevation(4.dp),
+                onClick = {onNext(user)}
             ){
                 Text("${user.nombre} ${user.apellido}")
                 Text("${user.email}")

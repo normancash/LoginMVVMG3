@@ -1,7 +1,6 @@
 package com.uam.navegacionobject.navigacion
 
 import com.uam.incrementovm.model.User
-import com.uam.navegacionobject.model.User
 import kotlinx.serialization.Serializable
 
 @Serializable

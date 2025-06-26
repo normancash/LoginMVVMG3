@@ -16,6 +16,7 @@ import com.uam.incrementovm.screen.IncrementoScreen
 import com.uam.incrementovm.screen.ListUserScreen
 import com.uam.incrementovm.screen.LoginScreen
 import com.uam.incrementovm.ui.theme.IncrementoVMTheme
+import com.uam.navegacionobject.navigacion.Navigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             IncrementoVMTheme {
                 Surface {
-                    ListUserScreen()
+                    Navigation()
                 }
             }
         }
