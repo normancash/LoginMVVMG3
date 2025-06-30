@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrainsKotlinSerialization)
     alias(libs.plugins.kotlin.parcelize)
+    kotlin("kapt")
 }
 
 android {
@@ -75,4 +76,9 @@ dependencies {
     //navegacion
     implementation (libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    //ROOM
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }

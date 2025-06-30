@@ -1,13 +1,17 @@
 package com.uam.incrementovm.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 @Parcelize
-data class User(val apellido: String,
-                val email: String,
-                val id: Int,
-                val nombre: String) : Parcelable
+@Entity(tableName = "users")
+data class User(@PrimaryKey val id: Int,
+                val nombre: String,
+                val apellido: String,
+                val email: String
+                ) : Parcelable
