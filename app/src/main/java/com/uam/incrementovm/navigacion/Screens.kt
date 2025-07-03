@@ -10,4 +10,4 @@ object Login
 object ListUser
 
 @Serializable
-data class Detail(val user : User)
+data class Detail(val id : Int)

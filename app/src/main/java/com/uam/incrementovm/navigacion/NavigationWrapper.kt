@@ -23,10 +23,15 @@ fun Navigation() {
         composable<ListUser>{backStackEntry ->
            ListUserScreen{navController.navigate(Detail(it))}
         }
-        composable<Detail>(typeMap = mapOf(typeOf<User>() to generarType<User>()))
+        /*composable<Detail>(typeMap = mapOf(typeOf<User>() to generarType<User>()))
         { backStackEntry ->
             val detail : Detail = backStackEntry.toRoute()
             DetailUser(detail.user)
+        }*/
+        composable<Detail>()
+        { backStackEntry ->
+            val detail : Detail = backStackEntry.toRoute()
+            DetailUser(detail.id)
         }
     }
 }

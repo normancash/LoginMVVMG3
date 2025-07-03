@@ -1,3 +1,3 @@
 package com.uam.incrementovm.model
 
-class ListUser : ArrayList<User>()
+class Users : ArrayList<User>()
